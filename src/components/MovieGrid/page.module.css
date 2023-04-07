@@ -1,3 +1,45 @@
+.gridSection {
+  padding-top: 8rem;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 8rem;
+}
+.pageTitleContainer {
+  margin-bottom: 2rem;
+}
+.pageTitle {
+  font-family: "Proza Libre", sans-serif;
+  font-weight: 400;
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: aliceblue;
+}
+.pageSubtitle {
+  font-family: "Proza Libre", sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: aliceblue;
+}
+.gridContainerWrapper {
+  width: 100%;
+}
+.gridInnerWrapper {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 25rem));
+  place-content: space-between space-evenly;
+  align-items: start;
+  gap: 4rem 2rem;
+}
+
+/* styles for item */
 .movieItemContainer {
   display: flex;
   flex-direction: column;

@@ -44,6 +44,7 @@ export default function RootLayout({
               <input className={style.input} placeholder="Search for movies" />
             </form>
           </div>
+          {children}
         </main>
       </body>
     </html>
