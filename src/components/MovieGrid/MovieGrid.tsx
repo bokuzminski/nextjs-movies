@@ -1,4 +1,5 @@
-import { MovieGridItem } from "@/components/MovieGrid/MovieGridItem";
+"use client";
+import { MovieGridItem } from "@/components/MovieGrid/components/MovieGridItem";
 import { BasicMovie, MoviesResponse } from "@/lib/movdbTypes";
 import { NextPage } from "next";
 import gridStyle from "./page.module.css";
