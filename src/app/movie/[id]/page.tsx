@@ -1,3 +1,5 @@
+import { DetailedMovie } from "@/lib/movdbTypes";
+
 export default async function MovieDetailsPage(params: {
   params: { id: number };
 }) {
@@ -12,5 +14,5 @@ async function getIndividualMovieDetails(movieId: number) {
 
   const response = await fetch(path.href);
 
-  return await response.json();
+  return (await response.json()) as DetailedMovie;
 }

@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import logo from "../../../public/Logo.png";
 import style from "./genres.module.css";
 
 export default async function GenresSideBar() {
@@ -7,6 +9,7 @@ export default async function GenresSideBar() {
   return (
     <aside className={style.container}>
       <nav className={style.inner}>
+        <Image src={logo} width={200} height={200} alt="logo" />
         <h1 className={style.title}>Discover</h1>
         <ul className={style.ul}>
           <div className={style.linkWrap}>

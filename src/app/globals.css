@@ -1,5 +1,9 @@
 :root {
-  --color-primary-light: #8b008b;
+  --color-primary-dark: #3c3c3b;
+  --color-accent-light: #db3069;
+  --color-accent-blue: #1446a0;
+  --color-accent-yellow: #f5d547;
+  --color-accent-beige: #ebebd3;
 }
 * {
   margin: 0;
@@ -11,6 +15,7 @@ html,
 body,
 #__next {
   height: 100%;
+  background-color: var(--color-primary-dark);
 }
 body {
   -webkit-font-smoothing: antialiased;

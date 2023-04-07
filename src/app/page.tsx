@@ -1,32 +1,28 @@
 import { MovieGridItem } from "@/components/MovieGrid/MovieGridItem";
+import { fetchPopularMovies } from "@/lib/movdbRequest";
+import { MoviesResponse } from "@/lib/movdbTypes";
 import style from "./page.module.css";
 
 export default async function Home() {
   const { results } = await getTrending();
 
   return (
-    <div className={style.gridContainer}>
-      {results.map((movie) => (
-        <MovieGridItem movie={movie} key={movie.id} />
-      ))}
-    </div>
+    <>
+      <h1>Popular</h1>
+      <div className={style.gridContainer}>
+        {results.map((movie) => (
+          <MovieGridItem key={movie.id} movie={movie} />
+        ))}
+      </div>
+    </>
   );
-}
-
-async function getGenres() {
-  const response = await fetch(
-    "https://api.themoviedb.org/3/genre/movie/list?api_key=3f8a72903ce666b0ca08e9e0b9141377"
-  );
-
-  return await response.json();
 }
 
 async function getTrending() {
-  const path = new URL("discover/movie", "https://api.themoviedb.org/3/");
-  path.searchParams.set("api_key", "3f8a72903ce666b0ca08e9e0b9141377");
-  path.searchParams.set("with_genres", "35");
-
-  const response = await fetch(path.href);
-
-  return await response.json();
+  const reqUrl = fetchPopularMovies();
+  const response: Response = await fetch(reqUrl);
+  if (!response.ok) {
+    throw new Error("failed to fetch pupular");
+  }
+  return (await response.json()) as MoviesResponse;
 }

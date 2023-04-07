@@ -1,5 +1,7 @@
 import GenresSideBar from "@/components/Sidebar/GenresSideBar";
+import Image from "next/image";
 import React from "react";
+import SearchIcon from "../../public/search.svg";
 import "./globals.css";
 import style from "./page.module.css";
 
@@ -26,8 +28,22 @@ export default function RootLayout({
       </head>
       <body className={style.body}>
         <main className={style.main}>
+          {/* @ts-expect-error Async Server Component */}
           <GenresSideBar />
-          <div className={style.contentWrapper}>{children}</div>
+          <div className={style.search}>
+            <form className={style.form}>
+              <button aria-label="Search for movies" className={style.button}>
+                <Image
+                  src={SearchIcon}
+                  width={16}
+                  height={16}
+                  alt="search"
+                  className={style.searchIcon}
+                />
+              </button>
+              <input className={style.input} placeholder="Search for movies" />
+            </form>
+          </div>
         </main>
       </body>
     </html>
