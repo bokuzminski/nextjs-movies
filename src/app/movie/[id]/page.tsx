@@ -1,3 +1,4 @@
+import { DetailedMovieGenres } from "@/app/movie/[id]/components/DetailedMovieGenres";
 import { DetailedMovie } from "@/lib/movdbTypes";
 import Image from "next/image";
 import detailedMovieStyle from "./movie.module.css";
@@ -10,7 +11,14 @@ export default async function MovieDetailsPage(params: {
   return (
     <section className={detailedMovieStyle.wrapper}>
       <div className={detailedMovieStyle.innerWrapper}>
-        <div className={detailedMovieStyle.contentWrapper}>
+        <div
+          className={detailedMovieStyle.contentWrapper}
+          /*  style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+            width: "100%",
+            height: "100%",
+          }} */
+        >
           <div className={detailedMovieStyle.posterContainer}>
             <Image
               alt={movie.title}
@@ -21,9 +29,15 @@ export default async function MovieDetailsPage(params: {
             />
           </div>
           <section className={detailedMovieStyle.MovieDetailsContainer}>
-            <h1>{movie.title}</h1>
-            <h3>Synopsis</h3>
-            <p>{movie.overview}</p>
+            <div className={detailedMovieStyle.headerSection}>
+              <h1 className={detailedMovieStyle.movieTitle}>{movie.title}</h1>
+              <h2 className={detailedMovieStyle.movieTagline}>
+                {movie.tagline}
+              </h2>
+            </div>
+            <DetailedMovieGenres genres={movie.genres} />
+            <h3 className={detailedMovieStyle.synopsis}>Synopsis</h3>
+            <p className={detailedMovieStyle.movieOverview}>{movie.overview}</p>
           </section>
         </div>
       </div>
@@ -38,4 +52,13 @@ async function getIndividualMovieDetails(movieId: number) {
   const response = await fetch(path.href);
 
   return (await response.json()) as DetailedMovie;
+}
+
+async function getCredits(id: number) {
+  const path = new URL(`movie/${id}/credits`, "https://api.themoviedb.org/3/");
+  path.searchParams.set("api_key", process.env.API_KEY!);
+
+  const resp = await fetch(path.href);
+
+  return await resp.json();
 }
