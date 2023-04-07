@@ -1,0 +1,39 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 4rem;
+  min-height: 100vh;
+}
+.innerWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.contentWrapper {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto 7rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.posterContainer {
+  display: flex;
+  width: 100%;
+  flex: 1 1 40%;
+  padding: 4rem;
+  max-width: 40%;
+  align-items: center;
+  justify-content: center;
+}
+.posterImage {
+}
+.MovieDetailsContainer {
+  width: 100%;
+  max-width: 60%;
+  padding: 4rem;
+  flex: 1 1 60%;
+}
