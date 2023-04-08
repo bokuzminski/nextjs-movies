@@ -1,5 +1,7 @@
 import { DetailedMovieGenres } from "@/app/movie/[id]/components/DetailedMovieGenres";
+import { DetailedMovieCast } from "@/app/movie/[id]/components/cast/DetailedMovieCast";
 import { DetailedMovie } from "@/lib/movdbTypes";
+import { formatMovieReleaseDate, formatMovieRuntimeToHHMM } from "@/lib/utils";
 import Image from "next/image";
 import detailedMovieStyle from "./movie.module.css";
 
@@ -13,11 +15,11 @@ export default async function MovieDetailsPage(params: {
       <div className={detailedMovieStyle.innerWrapper}>
         <div
           className={detailedMovieStyle.contentWrapper}
-          /*  style={{
+          style={{
             backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
             width: "100%",
             height: "100%",
-          }} */
+          }}
         >
           <div className={detailedMovieStyle.posterContainer}>
             <Image
@@ -34,12 +36,17 @@ export default async function MovieDetailsPage(params: {
               <h2 className={detailedMovieStyle.movieTagline}>
                 {movie.tagline}
               </h2>
+              <h2>Release Date</h2>
+              <h2>{formatMovieReleaseDate(movie.release_date)}</h2>
+              <h2>{formatMovieRuntimeToHHMM(movie.runtime)}</h2>
             </div>
             <DetailedMovieGenres genres={movie.genres} />
             <h3 className={detailedMovieStyle.synopsis}>Synopsis</h3>
             <p className={detailedMovieStyle.movieOverview}>{movie.overview}</p>
           </section>
         </div>
+        {/* @ts-expect-error Async Server Component */}
+        <DetailedMovieCast movieId={movie.id} />
       </div>
     </section>
   );

@@ -1,31 +1,36 @@
 export type DetailedMovie = {
   adult: boolean;
-  backdrop_path: string;
-  belongs_to_collection: any;
+  backdrop_path: string | null;
+  belongs_to_collection: Collection | null;
   budget: number;
   genres: Genre[];
-  homepage: string;
+  homepage: string | null;
   id: number;
-  imdb_id: string;
+  imdb_id: string | null;
   original_language: string;
   original_title: string;
-  overview: string;
+  overview: string | null;
   popularity: number;
-  poster_path: string;
+  poster_path: string | null;
   production_companies: ProductionCompany[];
   production_countries: ProductionCountry[];
   release_date: string;
   revenue: number;
-  runtime: number;
+  runtime: number | null;
   spoken_languages: SpokenLanguage[];
   status: string;
-  tagline: string;
+  tagline: string | null;
   title: string;
   video: boolean;
   vote_average: number;
   vote_count: number;
 };
-
+type Collection = {
+  id: number;
+  name: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+};
 type Genre = {
   id: number;
   name: string;
@@ -33,7 +38,7 @@ type Genre = {
 
 type ProductionCompany = {
   id: number;
-  logo_path: string;
+  logo_path: string | null;
   name: string;
   origin_country: string;
 };
@@ -58,13 +63,13 @@ export type MoviesResponse = {
 };
 export type BasicMovie = {
   adult: boolean;
-  backdrop_path: string;
+  backdrop_path: string | null;
   id: number;
   title: string;
   original_language: string;
   original_title: string;
   overview: string;
-  poster_path: string;
+  poster_path: string | null;
   media_type: string;
   genre_ids: number[];
   popularity: number;
@@ -73,3 +78,39 @@ export type BasicMovie = {
   vote_average: number;
   vote_count: number;
 };
+
+// Cast credits
+export interface Credits {
+  id: number;
+  cast: Cast[];
+  crew: Crew[];
+}
+
+export interface Cast {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path?: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+}
+
+export interface Crew {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path?: string;
+  credit_id: string;
+  department: string;
+  job: string;
+}
