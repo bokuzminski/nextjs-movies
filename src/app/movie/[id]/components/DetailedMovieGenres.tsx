@@ -9,7 +9,7 @@ export const DetailedMovieGenres: React.FC<DetailedMovieGenresProps> = ({
 
   return (
     <div>
-      <h1 className={style.title}>Genre</h1>
+      <h3 className={style.title}>Genre</h3>
       <div className={style.genresContainer}>
         {genres.map((genre) => (
           <Link
@@ -17,7 +17,7 @@ export const DetailedMovieGenres: React.FC<DetailedMovieGenresProps> = ({
             href={`/genre/${genre.id}`}
             className={style.genreWrapper}
           >
-            <h3 className={style.genreName}>{genre.name}</h3>
+            <h4 className={style.genreName}>{genre.name}</h4>
           </Link>
         ))}
       </div>

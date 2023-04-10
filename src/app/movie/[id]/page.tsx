@@ -1,5 +1,5 @@
 import { DetailedMovieGenres } from "@/app/movie/[id]/components/DetailedMovieGenres";
-import { DetailedMovieCast } from "@/app/movie/[id]/components/cast/DetailedMovieCast";
+import SocialComponent from "@/components/websiteIcons/SocialComponent";
 import { DetailedMovie } from "@/lib/movdbTypes";
 import { formatMovieReleaseDate, formatMovieRuntimeToHHMM } from "@/lib/utils";
 import Image from "next/image";
@@ -15,18 +15,21 @@ export default async function MovieDetailsPage(params: {
       <div className={detailedMovieStyle.innerWrapper}>
         <div
           className={detailedMovieStyle.contentWrapper}
+          /*
           style={{
             backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+            backgroundPositionX: "5rem",
+            backgroundPositionY: "6rem",
             width: "100%",
             height: "100%",
-          }}
+          }} */
         >
           <div className={detailedMovieStyle.posterContainer}>
             <Image
               alt={movie.title}
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-              width={300}
-              height={450}
+              src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+              width={400}
+              height={600}
               className={detailedMovieStyle.posterImage}
             />
           </div>
@@ -36,17 +39,18 @@ export default async function MovieDetailsPage(params: {
               <h2 className={detailedMovieStyle.movieTagline}>
                 {movie.tagline}
               </h2>
-              <h2>Release Date</h2>
-              <h2>{formatMovieReleaseDate(movie.release_date)}</h2>
-              <h2>{formatMovieRuntimeToHHMM(movie.runtime)}</h2>
+              <div className={detailedMovieStyle.runTimeDetails}>
+                <h2>{formatMovieReleaseDate(movie.release_date)}</h2>
+                <h2>{formatMovieRuntimeToHHMM(movie.runtime)}</h2>
+              </div>
             </div>
             <DetailedMovieGenres genres={movie.genres} />
             <h3 className={detailedMovieStyle.synopsis}>Synopsis</h3>
             <p className={detailedMovieStyle.movieOverview}>{movie.overview}</p>
+            {/* @ts-expect-error Async Server Component */}
+            <SocialComponent movieId={movie.id} homePage={movie.homepage} />
           </section>
         </div>
-        {/* @ts-expect-error Async Server Component */}
-        <DetailedMovieCast movieId={movie.id} />
       </div>
     </section>
   );

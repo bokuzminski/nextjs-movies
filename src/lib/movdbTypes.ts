@@ -114,3 +114,13 @@ export interface Crew {
   department: string;
   job: string;
 }
+
+// external links
+export type ExternalLinks = {
+  id: number;
+  imdb_id: string | null;
+  wikidata_id: string | null;
+  facebook_id: string | null;
+  instagram_id: string | null;
+  twitter_id: string | null;
+};

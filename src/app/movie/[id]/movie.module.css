@@ -24,15 +24,18 @@
 .posterContainer {
   display: flex;
   width: 100%;
+  max-width: 40%;
   flex: 1 1 40%;
   padding: 4rem;
-  max-width: 40%;
   align-items: center;
   justify-content: center;
 }
 .posterImage {
   border-radius: 0.8rem;
   box-shadow: 0rem 2rem 5rem;
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
 }
 .MovieDetailsContainer {
   width: 100%;
@@ -68,9 +71,16 @@
   font-size: 1.4rem;
 }
 .movieOverview {
+  font-family: "Montserrat", sans-serif;
   font-size: 1.4rem;
   line-height: 1.8;
   font-weight: 500;
   margin-bottom: 3rem;
   color: white;
+}
+.runTimeDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
