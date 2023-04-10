@@ -124,3 +124,22 @@ export type ExternalLinks = {
   instagram_id: string | null;
   twitter_id: string | null;
 };
+
+// Video / trailers
+export type VideosResponse = {
+  id: number;
+  results: Video[];
+};
+
+export type Video = {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+};
