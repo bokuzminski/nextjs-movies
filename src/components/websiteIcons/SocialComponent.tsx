@@ -13,7 +13,6 @@ export default async function SocialComponent({
   homePage,
 }: SocialComponentProps) {
   const { imdb_id, instagram_id, twitter_id } = await fetchExternalIds(movieId);
-  console.log(homePage);
 
   return (
     <section className={style.socialWrapper}>
