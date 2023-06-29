@@ -13,10 +13,10 @@ export const MovieGrid: React.FC<MovieGridProps> = ({ movies, title = "" }) => {
       </div>
     </section>
   );
-
-  function mapMoviesIntoView(movie: BasicMovie) {
-    return <MovieGridItem key={movie.id} movie={movie} />;
-  }
 };
+
+function mapMoviesIntoView(movie: BasicMovie) {
+  return <MovieGridItem key={movie.id} movie={movie} />;
+}
 
 type MovieGridProps = { movies: MoviesResponse["results"]; title?: string };

@@ -19,12 +19,11 @@ export default async function MovieDetailsPage(params: { params: { id: number } 
             src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
             width={400}
             height={600}
-            className=""
           />
-          <div className="flex  flex-col -mx-7 -mb-6 px-7 pb-6 pt-2">
-            <h1 className="uppercase text-3xl font-semibold drop-shadow-lg">{movie.title}</h1>
-            <h2 className="text-2xl">{movie.tagline}</h2>
-            <p className="text-left max-w-xl">{movie.overview}</p>
+          <div className="flex  flex-col -mx-7 -mb-6 px-7 pb-6 pt-2 max-w-[60%]">
+            <h1 className="uppercase text-4xl font-extralight mb-2 tracking-wide">{movie.title}</h1>
+            <h2 className="text-lg font-bold mb-8 uppercase">{movie.tagline}</h2>
+            <p className="text-left text-sm font-medium">{movie.overview}</p>
             <div className="flex flex-row space-x-5">
               <h2>{formatMovieReleaseDate(movie.release_date)}</h2>
               <h2>{formatMovieRuntimeToHHMM(movie.runtime)}</h2>
@@ -32,8 +31,8 @@ export default async function MovieDetailsPage(params: { params: { id: number } 
             <div className="">
               <DetailedMovieGenres genres={movie.genres} />
             </div>
+            <SocialComponent movieId={movie.id} homePage={movie.homepage} />
           </div>
-          <SocialComponent movieId={movie.id} homePage={movie.homepage} />
         </div>
       </section>
       {/* <DetailedMovieCast movieId={movie.id} /> */}

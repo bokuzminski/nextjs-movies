@@ -5,11 +5,7 @@ import { MoviesResponse } from "@/lib/movdbTypes";
 export default async function Home() {
   const { results } = await getTrending();
 
-  return (
-    <>
-      <MovieGrid movies={results} title="popular" />
-    </>
-  );
+  return <MovieGrid movies={results} title="popular" />;
 }
 
 async function getTrending() {

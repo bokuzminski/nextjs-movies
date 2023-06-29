@@ -5,9 +5,7 @@ import Link from "next/link";
 import style from "./MovieGridItemStyle.module.css";
 
 export const MovieGridItem: React.FC<MovieGridItemProps> = ({ movie }) => {
-  const releaseYear = movie.release_date
-    ? movie.release_date.split("-")[0]
-    : "";
+  const releaseYear = movie.release_date ? movie.release_date.split("-")[0] : "";
 
   return (
     <div className={style.movieItemContainer}>
@@ -24,7 +22,7 @@ export const MovieGridItem: React.FC<MovieGridItemProps> = ({ movie }) => {
           />
           <h3 className={style.score}>{movie.vote_average}</h3>
         </div>
-        <h6 className={style.titleText}>{`${movie.title} (${releaseYear})`}</h6>
+        <h6 className="text-white text-center mt-2 font-medium text-lg">{`${movie.title} (${releaseYear})`}</h6>
       </Link>
     </div>
   );
