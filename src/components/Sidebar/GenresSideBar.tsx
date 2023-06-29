@@ -1,42 +1,33 @@
+import Image from "next/image";
 import Link from "next/link";
-import style from "./genres.module.css";
+import logo from "../../../public/logo.png";
 
 export default async function GenresSideBar() {
   const { genres } = await getGenres();
 
   return (
-    <aside className="sticky top-0 w-1/6 py-10">
-      <nav className={style.inner}>
-        {/* <Image src={logo} width={200} height={200} alt="logo" /> */}
-        <h1 className="text-gray-400/70 font-medium uppercase">Discover</h1>
+    <aside className="sticky top-0 w-1/6 mt-10 px-5">
+      <nav>
+        <Image src={logo} width={200} height={200} alt="logo" />
+        <h1 className="text-white uppercase text-l font-semi-bold px-5">Discover</h1>
         <ul className="list-outside list-none">
-          <div className={style.linkWrap}>
-            <Link href={"/"}>
-              <li className={style.link}>Popular</li>
-            </Link>
-          </div>
-          <div className={style.linkWrap}>
-            <Link href={{ query: { name: "upcoming" }, href: "/upcoming" }} passHref>
-              <li className={style.link}>Upcoming</li>
-            </Link>
-          </div>
-          <div className={style.linkWrap}>
-            <Link href={"/"}>
-              <li className={style.link}>Top rated</li>
-            </Link>
-          </div>
+          <Link href={"/"}>
+            <li className="text-white px-10 font-light my-2">Popular</li>
+          </Link>
+          <Link href={"/"} passHref>
+            <li className="text-white px-10 font-light my-2">Upcoming</li>
+          </Link>
+          <Link href={"/"}>
+            <li className="text-white px-10 font-light my-2">Top rated</li>
+          </Link>
         </ul>
-        <h1 className="text-gray-400/70 font-medium uppercase">Genres</h1>
-        <ul className={style.ul}>
-          {genres.map((genre) => {
-            return (
-              <div className={style.linkWrap} key={genre.id}>
-                <Link href={`/genre/${genre.id}`}>
-                  <li className="font-semibold text-gray-400/70">{genre.name}</li>
-                </Link>
-              </div>
-            );
-          })}
+        <h1 className="text-white uppercase text-l font-semi-bold px-5">Genres</h1>
+        <ul className="list-outside list-none">
+          {genres.map((item) => (
+            <Link href={`/genre/${item.id}`} passHref key={item.id}>
+              <li className="text-white px-10 font-light my-2">{item.name}</li>
+            </Link>
+          ))}
         </ul>
       </nav>
     </aside>
