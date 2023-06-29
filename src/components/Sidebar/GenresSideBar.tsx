@@ -1,27 +1,22 @@
-import Image from "next/image";
 import Link from "next/link";
-import logo from "../../../public/Logo.png";
 import style from "./genres.module.css";
 
 export default async function GenresSideBar() {
   const { genres } = await getGenres();
 
   return (
-    <aside className={style.container}>
+    <aside className="sticky top-0 w-1/6 py-10">
       <nav className={style.inner}>
-        <Image src={logo} width={200} height={200} alt="logo" />
-        <h1 className={style.title}>Discover</h1>
-        <ul className={style.ul}>
+        {/* <Image src={logo} width={200} height={200} alt="logo" /> */}
+        <h1 className="text-gray-400/70 font-medium uppercase">Discover</h1>
+        <ul className="list-outside list-none">
           <div className={style.linkWrap}>
             <Link href={"/"}>
               <li className={style.link}>Popular</li>
             </Link>
           </div>
           <div className={style.linkWrap}>
-            <Link
-              href={{ query: { name: "upcoming" }, href: "/upcoming" }}
-              passHref
-            >
+            <Link href={{ query: { name: "upcoming" }, href: "/upcoming" }} passHref>
               <li className={style.link}>Upcoming</li>
             </Link>
           </div>
@@ -31,13 +26,13 @@ export default async function GenresSideBar() {
             </Link>
           </div>
         </ul>
-        <h1 className={style.title}>Genres</h1>
+        <h1 className="text-gray-400/70 font-medium uppercase">Genres</h1>
         <ul className={style.ul}>
           {genres.map((genre) => {
             return (
               <div className={style.linkWrap} key={genre.id}>
                 <Link href={`/genre/${genre.id}`}>
-                  <li className={style.link}>{genre.name}</li>
+                  <li className="font-semibold text-gray-400/70">{genre.name}</li>
                 </Link>
               </div>
             );
