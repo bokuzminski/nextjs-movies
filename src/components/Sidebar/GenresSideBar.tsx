@@ -9,8 +9,8 @@ export default async function GenresSideBar() {
     <aside className="sticky top-0 w-1/6 mt-10 px-5">
       <nav>
         <Image src={logo} width={200} height={200} alt="logo" />
-        <h1 className="text-white uppercase text-l font-semi-bold px-5">Discover</h1>
-        <ul className="list-outside list-none">
+        <h1 className="text-white uppercase text-l font-semi-bold px-6">Discover</h1>
+        <ul className="list-outside list-none pb-4">
           <Link href={"/"}>
             <li className="text-white px-10 font-light my-2">Popular</li>
           </Link>
