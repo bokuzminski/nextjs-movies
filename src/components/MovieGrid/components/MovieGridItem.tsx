@@ -1,3 +1,4 @@
+"use client";
 import { BasicMovie } from "@/lib/movdbTypes";
 import Image from "next/image";
 import Link from "next/link";

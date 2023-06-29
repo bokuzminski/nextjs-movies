@@ -20,3 +20,9 @@ export function fetchUpcomingMovies() {
 
   return requestPath.href;
 }
+
+export const MovieDBRequestHeader = new Headers({
+  "Cache-Control": "no-cache",
+  Authorization: `Bearer ${process.env.BEARER_TOKEN!}`,
+  "Content-Type": "application/json"
+});

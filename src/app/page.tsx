@@ -7,14 +7,19 @@ export default async function Home() {
 
   return (
     <>
-      <MovieGrid movies={results} />
+      <MovieGrid movies={results} title="popular" />
     </>
   );
 }
 
 async function getTrending() {
   const reqUrl = fetchPopularMovies();
-  const response: Response = await fetch(reqUrl);
+  let header = new Headers({
+    "Cache-Control": "no-cache",
+    Authorization: `Bearer ${process.env.BEARER_TOKEN!}`,
+    "Content-Type": "application/json"
+  });
+  const response: Response = await fetch(reqUrl, { headers: header });
   if (!response.ok) {
     throw new Error("failed to fetch pupular");
   }

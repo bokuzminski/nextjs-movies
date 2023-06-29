@@ -18,7 +18,10 @@ export default async function GenresSideBar() {
             </Link>
           </div>
           <div className={style.linkWrap}>
-            <Link href={{ query: { name: "upcoming" } }}>
+            <Link
+              href={{ query: { name: "upcoming" }, href: "/upcoming" }}
+              passHref
+            >
               <li className={style.link}>Upcoming</li>
             </Link>
           </div>

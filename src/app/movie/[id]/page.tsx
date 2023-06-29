@@ -5,9 +5,7 @@ import { formatMovieReleaseDate, formatMovieRuntimeToHHMM } from "@/lib/utils";
 import Image from "next/image";
 import detailedMovieStyle from "./movie.module.css";
 
-export default async function MovieDetailsPage(params: {
-  params: { id: number };
-}) {
+export default async function MovieDetailsPage(params: { params: { id: number } }) {
   const movie = await getIndividualMovieDetails(params.params.id);
 
   return (
@@ -36,9 +34,7 @@ export default async function MovieDetailsPage(params: {
           <section className={detailedMovieStyle.MovieDetailsContainer}>
             <div className={detailedMovieStyle.headerSection}>
               <h1 className={detailedMovieStyle.movieTitle}>{movie.title}</h1>
-              <h2 className={detailedMovieStyle.movieTagline}>
-                {movie.tagline}
-              </h2>
+              <h2 className={detailedMovieStyle.movieTagline}>{movie.tagline}</h2>
               <div className={detailedMovieStyle.runTimeDetails}>
                 <h2>{formatMovieReleaseDate(movie.release_date)}</h2>
                 <h2>{formatMovieRuntimeToHHMM(movie.runtime)}</h2>
@@ -47,7 +43,6 @@ export default async function MovieDetailsPage(params: {
             <DetailedMovieGenres genres={movie.genres} />
             <h3 className={detailedMovieStyle.synopsis}>Synopsis</h3>
             <p className={detailedMovieStyle.movieOverview}>{movie.overview}</p>
-            {/* @ts-expect-error Async Server Component */}
             <SocialComponent movieId={movie.id} homePage={movie.homepage} />
           </section>
         </div>
