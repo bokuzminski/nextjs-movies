@@ -1,19 +1,15 @@
 import { MovieGridItem } from "@/components/MovieGrid/components/MovieGridItem";
 import { BasicMovie, MoviesResponse } from "@/lib/movdbTypes";
-import { NextPage } from "next";
-import gridStyle from "./page.module.css";
 
-export const MovieGrid: NextPage<MovieGridProps> = ({ movies, title = "" }) => {
+export const MovieGrid: React.FC<MovieGridProps> = ({ movies, title = "" }) => {
   return (
-    <section className={gridStyle.gridSection}>
-      <div className={gridStyle.gridContainerWrapper}>
-        <div className={gridStyle.gridInnerWrapper}>
-          <div className={gridStyle.pageTitleContainer}>
-            <h1 className={gridStyle.pageTitle}>{title}</h1>
-            <h2 className={gridStyle.pageSubtitle}>MOVIES</h2>
-          </div>
-          <div className={gridStyle.gridContainer}>{movies.map(mapMoviesIntoView)}</div>
+    <section>
+      <div className="mt-10 mr-10 pl-2">
+        <div className="pb-5">
+          <h1 className="text-2xl text-white uppercase font-bold">{title}</h1>
+          <h2 className="text-l text-white uppercase font-semibold">MOVIES</h2>
         </div>
+        <div className="grid grid-cols-1 gap-5 xl:grid-cols-5">{movies.map(mapMoviesIntoView)}</div>
       </div>
     </section>
   );
