@@ -1,23 +1,19 @@
 import { MovieGrid } from "@/components/MovieGrid/MovieGrid";
+import { Pagination } from "@/components/Pagination/Pagination";
 import { fetchPopularMovies } from "@/lib/movdbRequest";
-import { MoviesResponse } from "@/lib/movdbTypes";
 
-export default async function Home() {
-  const { results } = await getTrending();
+export default async function Home({ searchParams: { page } }: HomeProps) {
+  const { results } = await fetchPopularMovies(Number(page));
 
-  return <MovieGrid movies={results} title="popular" />;
+  return (
+    <div className="flex flex-col">
+      <MovieGrid movies={results} title="popular" />
+      <Pagination />
+    </div>
+  );
 }
 
-async function getTrending() {
-  const reqUrl = fetchPopularMovies();
-  let header = new Headers({
-    "Cache-Control": "no-cache",
-    Authorization: `Bearer ${process.env.BEARER_TOKEN!}`,
-    "Content-Type": "application/json"
-  });
-  const response: Response = await fetch(reqUrl, { headers: header });
-  if (!response.ok) {
-    throw new Error("failed to fetch pupular");
-  }
-  return (await response.json()) as MoviesResponse;
-}
+type HomeProps = {
+  params: {};
+  searchParams: { page: string };
+};

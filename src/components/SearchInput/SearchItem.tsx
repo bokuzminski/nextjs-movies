@@ -1,10 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import SearchIcon from "../../../public/search.svg";
-import style from "./Search.module.css";
 
 const createSearchParams = (name: string, value: string) => {
   const params = new URLSearchParams();
@@ -18,19 +15,21 @@ export const SearchItemNavbar = () => {
   const [text, setText] = useState("");
 
   return (
-    <div className={style.search}>
-      <form className={style.form} onSubmit={logSubmit}>
-        <button aria-label="Search for movies" className={style.button}>
-          <Image src={SearchIcon} width={16} height={16} alt="search" className={style.searchIcon} />
-        </button>
-        <input className={style.input} placeholder="Search for movies" onChange={(e) => setText(e.target.value)} />
+    <div className="absolute flex top-0 right-0 my-10 mr-10">
+      <form className="flex" onSubmit={logSubmit}>
+        <input
+          type="search"
+          className="bg-purple-white shadow rounded-full border-0 p-3"
+          placeholder="Search movies..."
+          onChange={(t) => setText(t.target.value)}
+        />
       </form>
     </div>
   );
 
   function logSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!text || text === "" || text === " ") {
+    if (!text) {
       router.push("/");
       return;
     }

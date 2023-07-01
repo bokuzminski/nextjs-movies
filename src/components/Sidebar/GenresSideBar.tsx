@@ -1,17 +1,18 @@
+import { fetchGenresList } from "@/lib/movdbRequest";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../public/logo.png";
 
 export default async function GenresSideBar() {
-  const { genres } = await getGenres();
+  const { genres } = await fetchGenresList();
 
   return (
-    <aside className="sticky top-0 w-1/6 mt-10 px-5">
+    <aside className="sticky top-0 w-1/4 mt-10 px-5">
       <nav>
         <Image src={logo} width={200} height={200} alt="logo" />
         <h1 className="text-white uppercase text-l font-semi-bold px-6">Discover</h1>
         <ul className="list-outside list-none pb-4">
-          <Link href={"/"} className="flex items-center px-8">
+          <Link href={{ pathname: "/", query: { page: 1 } }} className="flex items-center px-8">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -91,16 +92,3 @@ export default async function GenresSideBar() {
     </aside>
   );
 }
-
-async function getGenres() {
-  const path = new URL("genre/movie/list", "https://api.themoviedb.org/3/");
-  path.searchParams.set("api_key", "3f8a72903ce666b0ca08e9e0b9141377");
-
-  const response = await fetch(path.href);
-
-  return (await response.json()) as Genres;
-}
-
-type Genres = {
-  genres: { id: string; name: string }[];
-};

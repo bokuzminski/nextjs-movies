@@ -2,17 +2,16 @@
 import { BasicMovie } from "@/lib/movdbTypes";
 import Image from "next/image";
 import Link from "next/link";
-import style from "./MovieGridItemStyle.module.css";
 
 export const MovieGridItem: React.FC<MovieGridItemProps> = ({ movie }) => {
   const releaseYear = movie.release_date ? movie.release_date.split("-")[0] : "";
 
   return (
-    <div className={style.movieItemContainer}>
+    <div className="">
       <Link href={`/movie/${movie.id}`}>
-        <div className={style.frame}>
+        <div className="">
           <Image
-            className={style.poster}
+            className=""
             alt={movie.title}
             width={300}
             height={450}
@@ -20,7 +19,7 @@ export const MovieGridItem: React.FC<MovieGridItemProps> = ({ movie }) => {
             placeholder="empty"
             priority
           />
-          <h3 className={style.score}>{movie.vote_average}</h3>
+          <h3 className="">{movie.vote_average}</h3>
         </div>
         <h6 className="text-white text-center mt-2 font-medium text-lg">{`${movie.title} (${releaseYear})`}</h6>
       </Link>

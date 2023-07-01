@@ -1,28 +1,52 @@
-const BASE_URL = "https://api.themoviedb.org/3/";
-const API_KEY = process.env.API_KEY!;
+import { MoviesResponse } from "@/lib/movdbTypes";
 
-export function createNewRequest(url: string) {
+const BASE_URL = "https://api.themoviedb.org/3/";
+const BEARER_TOKEN = process.env.BEARER_TOKEN;
+type Genres = {
+  genres: { id: string; name: string }[];
+};
+
+export const MovieDBRequestHeader = new Headers({
+  Authorization: `Bearer ${BEARER_TOKEN}`,
+  "Content-Type": "application/json"
+});
+
+export function createNewRequest(url: string, page: number = 1) {
   const urlPath = new URL(url, BASE_URL);
-  urlPath.searchParams.set("api_key", API_KEY);
-  urlPath.searchParams.set("page", "1");
+  urlPath.searchParams.set("page", page.toString());
 
   return urlPath;
 }
 
-export function fetchPopularMovies() {
-  const requestPath = createNewRequest("movie/popular");
+export async function fetchGenresList(): Promise<Genres> {
+  const request = createNewRequest("genre/movie/list");
 
-  return requestPath.href;
+  const response = await fetch(request, { headers: MovieDBRequestHeader });
+  if (!response.ok) {
+    throw new Error("Failed to fetch genres");
+  }
+
+  return await response.json();
 }
 
-export function fetchUpcomingMovies() {
-  const requestPath = createNewRequest("movie/upcoming");
+export async function fetchPopularMovies(page: number = 1): Promise<MoviesResponse> {
+  const requestPath = createNewRequest("movie/popular", page);
 
-  return requestPath.href;
+  const response = await fetch(requestPath, { headers: MovieDBRequestHeader });
+  if (!response.ok) {
+    throw new Error("Failed to fetch popular movies");
+  }
+
+  return await response.json();
 }
 
-export const MovieDBRequestHeader = new Headers({
-  "Cache-Control": "no-cache",
-  Authorization: `Bearer ${process.env.BEARER_TOKEN!}`,
-  "Content-Type": "application/json"
-});
+export async function fetchUpcomingMovies(page?: number): Promise<MoviesResponse> {
+  const requestPath = createNewRequest("movie/upcoming", page);
+
+  const response = await fetch(requestPath, { headers: MovieDBRequestHeader });
+  if (!response.ok) {
+    throw new Error("Failed to fetch upcoming movies");
+  }
+
+  return await response.json();
+}

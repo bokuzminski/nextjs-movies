@@ -1,18 +1,10 @@
 import { VideoModal } from "@/components/VideoModal/VideoModal";
-import {
-  HomepageIcon,
-  IMDBIcon,
-  InstagramIcon,
-  TwitterIcon,
-} from "@/components/websiteIcons/TwitterIcon";
+import { HomepageIcon, IMDBIcon, InstagramIcon, TwitterIcon } from "@/components/websiteIcons/TwitterIcon";
 import { createNewRequest } from "@/lib/movdbRequest";
 import { DetailedMovie, ExternalLinks, VideosResponse } from "@/lib/movdbTypes";
 import style from "./social.module.css";
 
-export default async function SocialComponent({
-  movieId,
-  homePage,
-}: SocialComponentProps) {
+export default async function SocialComponent({ movieId, homePage }: SocialComponentProps) {
   const { imdb_id, instagram_id, twitter_id } = await fetchExternalIds(movieId);
   const trailer = await fetchTrailer(movieId);
 
@@ -38,11 +30,9 @@ async function fetchTrailer(movieId: number) {
   const path = createNewRequest(`movie/${movieId}/videos`);
   const req = await fetch(path.href);
   const { results }: VideosResponse = await req.json();
-
+  if (!results) return null;
   const foundTrailer = results.find(
-    (video) =>
-      (video.name === "Official Trailer" || video.type === "Trailer") &&
-      video.site === "YouTube"
+    (video) => (video.name === "Official Trailer" || video.type === "Trailer") && video.site === "YouTube"
   );
 
   return foundTrailer || null;
