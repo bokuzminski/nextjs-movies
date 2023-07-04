@@ -17,12 +17,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className="bg-stone-50 dark:bg-stone-950">
-        <main className="flex min-h-screen 2xl:max-w-screen 2xl:mx-auto">
-          <GenresSideBar />
-          <SearchItemNavbar />
-          {children}
-        </main>
+      <body className="flex min-h-screen 2xl:max-w-screen 2xl:mx-auto">
+        <GenresSideBar />
+        <SearchItemNavbar />
+        {children}
       </body>
     </html>
   );

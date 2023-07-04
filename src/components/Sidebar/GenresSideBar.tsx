@@ -73,7 +73,11 @@ export default async function GenresSideBar() {
         <h1 className="text-white uppercase text-l font-semi-bold px-5">Genres</h1>
         <ul className="list-outside list-none">
           {genres.map((item) => (
-            <Link href={`/genre/${item.id}`} key={item.id} className="flex items-center my-2 px-8">
+            <Link
+              href={{ pathname: `/genre`, query: { name: item.name, id: item.id } }}
+              key={item.id}
+              className="flex items-center my-2 px-8"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
