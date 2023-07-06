@@ -9,5 +9,5 @@ export default async function GenrePage(params: GenrePageParams) {
 
 type GenrePageParams = {
   params: {};
-  searchParams: { name: string; id: string };
+  searchParams: { name: string; id: string; page: number };
 };

@@ -3,14 +3,12 @@ import { BasicMovie, MoviesResponse } from "@/lib/movdbTypes";
 
 export const MovieGrid: React.FC<MovieGridProps> = ({ movies, title = "" }) => {
   return (
-    <section>
-      <div className="mt-10">
-        <div className="mb-5">
-          <h1 className="text-2xl text-white uppercase font-bold">{title}</h1>
-          <h2 className="text-l text-white uppercase font-semibold">MOVIES</h2>
-        </div>
-        <div className="grid grid-cols-5 gap-5 pr-4">{movies.map(mapMoviesIntoView)}</div>
-      </div>
+    <section className="mt-10">
+      <header className="mb-5">
+        <h1 className="text-2xl text-white uppercase font-bold">{title}</h1>
+        <h2 className="text-l text-white uppercase font-semibold">MOVIES</h2>
+      </header>
+      <section className="grid grid-cols-1 md:grid-cols-5 gap-5 pr-4">{movies.map(mapMoviesIntoView)}</section>
     </section>
   );
 };

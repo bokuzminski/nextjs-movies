@@ -12,21 +12,21 @@ export const Pagination = () => {
 
   return (
     <ReactPaginate
-      breakLabel="..."
-      nextLabel=">"
       onPageChange={handlePageClick}
       pageRangeDisplayed={5}
       pageCount={500}
       initialPage={convertPageIndexToNumber}
+      nextLabel=">"
       previousLabel="<"
+      breakLabel="..."
       nextClassName="px-4"
       previousClassName="px-4"
       breakClassName="px-4"
       renderOnZeroPageCount={null}
-      className="bg-white flex flex-row items-center justify-center mt-8"
+      className="flex flex-row items-center justify-center mt-8"
       containerClassName="border-8"
-      pageClassName="text-lg px-4 border"
-      activeClassName="text-black bg-sky-400"
+      pageClassName="text-lg px-4 border border-indigo-500 rounded-full"
+      activeClassName="text-white bg-indigo-600"
     />
   );
 

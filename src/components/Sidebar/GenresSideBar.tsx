@@ -1,3 +1,4 @@
+import { GenreListItem } from "@/components/Sidebar/GenreListItem/GenreListItem";
 import { fetchGenresList } from "@/lib/movdbRequest";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +8,7 @@ export default async function GenresSideBar() {
   const { genres } = await fetchGenresList();
 
   return (
-    <aside className="sticky top-0 w-1/4 mt-10 px-5">
+    <aside className="sticky top-0 w-1/6 mt-10 px-5">
       <nav>
         <Image src={logo} width={200} height={200} alt="logo" />
         <h1 className="text-white uppercase text-l font-semi-bold px-6">Discover</h1>
@@ -73,23 +74,7 @@ export default async function GenresSideBar() {
         <h1 className="text-white uppercase text-l font-semi-bold px-5">Genres</h1>
         <ul className="list-outside list-none">
           {genres.map((item) => (
-            <Link
-              href={{ pathname: `/genre`, query: { name: item.name, id: item.id } }}
-              key={item.id}
-              className="flex items-center my-2 px-8"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="white"
-                className="w-4 h-4 "
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <li className="text-white px-2 font-light">{item.name}</li>
-            </Link>
+            <GenreListItem key={item.id} id={item.id} name={item.name} />
           ))}
         </ul>
       </nav>

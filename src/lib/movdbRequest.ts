@@ -62,3 +62,15 @@ export async function fetchMoviesByGenre(genre: string, page?: number): Promise<
 
   return await response.json();
 }
+
+export async function fetchMoviesBySearchQuery(query: string, page?: number): Promise<MoviesResponse> {
+  const requestPath = createNewRequest("search/movie", page);
+  requestPath.searchParams.set("query", query);
+
+  const response = await fetch(requestPath, { headers: MovieDBRequestHeader });
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${query} movies`);
+  }
+
+  return await response.json();
+}

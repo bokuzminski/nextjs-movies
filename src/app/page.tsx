@@ -6,10 +6,10 @@ export default async function Home({ searchParams: { page } }: HomeProps) {
   const { results } = await fetchPopularMovies(Number(page));
 
   return (
-    <div className="flex flex-col">
+    <section className="flex flex-col items-center justify-center">
       <MovieGrid movies={results} title="popular" />
       <Pagination />
-    </div>
+    </section>
   );
 }
 
