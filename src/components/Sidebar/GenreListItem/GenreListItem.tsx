@@ -20,5 +20,5 @@ export const GenreListItem = ({ id, name }: GenreListItemProps) => {
 
 type GenreListItemProps = {
   name: string;
-  id: string;
+  id: number;
 };

@@ -1,10 +1,7 @@
-import { MoviesResponse } from "@/lib/movdbTypes";
+import { DetailedMovie, Genre, MoviesResponse } from "@/lib/movdbTypes";
 
 const BASE_URL = "https://api.themoviedb.org/3/";
 const BEARER_TOKEN = process.env.BEARER_TOKEN;
-type Genres = {
-  genres: { id: string; name: string }[];
-};
 
 export const MovieDBRequestHeader = new Headers({
   Authorization: `Bearer ${BEARER_TOKEN}`,
@@ -18,7 +15,7 @@ export function createNewRequest(url: string, page: number = 1) {
   return urlPath;
 }
 
-export async function fetchGenresList(): Promise<Genres> {
+export async function fetchGenresList(): Promise<{ genres: Genre[] }> {
   const request = createNewRequest("genre/movie/list");
 
   const response = await fetch(request, { headers: MovieDBRequestHeader });
@@ -70,6 +67,17 @@ export async function fetchMoviesBySearchQuery(query: string, page?: number): Pr
   const response = await fetch(requestPath, { headers: MovieDBRequestHeader });
   if (!response.ok) {
     throw new Error(`Failed to fetch ${query} movies`);
+  }
+
+  return await response.json();
+}
+
+export async function fetchIndividualMovieDetails(movieId: number): Promise<DetailedMovie> {
+  const requestPath = createNewRequest(`movie/${movieId}`);
+
+  const response = await fetch(requestPath, { headers: MovieDBRequestHeader });
+  if (!response.ok) {
+    throw new Error(`Failed to fetch details for movie: ${movieId}`);
   }
 
   return await response.json();

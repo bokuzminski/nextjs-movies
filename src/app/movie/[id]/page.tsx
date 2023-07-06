@@ -1,17 +1,17 @@
 import { DetailedMovieGenres } from "@/app/movie/[id]/components/DetailedMovieGenres";
 import SocialComponent from "@/components/websiteIcons/SocialComponent";
-import { DetailedMovie } from "@/lib/movdbTypes";
+import { fetchIndividualMovieDetails } from "@/lib/movdbRequest";
 import { formatMovieReleaseDate, formatMovieRuntimeToHHMM } from "@/lib/utils";
 import Image from "next/image";
 
 export default async function MovieDetailsPage(params: { params: { id: number } }) {
-  const movie = await getIndividualMovieDetails(params.params.id);
+  const movie = await fetchIndividualMovieDetails(params.params.id);
 
   return (
-    <main className="flex-1 py-10 px-5 sm:px-">
+    <main className="py-10 sm:px-">
       <section>
         <div
-          className="flex flex-row space-x-10 mt-4 bg-black/50 bg-blend-multiply rounded-3xl bg-cover bg-center px-10 pt-4 pb-6 text-white"
+          className="flex flex-row max-w-full mr-8 bg-blend-multiply bg-[#121212]/75 bg-no-repeat bg-right"
           style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})` }}
         >
           <Image
@@ -20,31 +20,24 @@ export default async function MovieDetailsPage(params: { params: { id: number } 
             width={400}
             height={600}
           />
-          <div className="flex  flex-col -mx-7 -mb-6 px-7 pb-6 pt-2 max-w-[60%]">
-            <h1 className="uppercase text-4xl font-extralight mb-2 tracking-wide">{movie.title}</h1>
-            <h2 className="text-lg font-bold mb-8 uppercase">{movie.tagline}</h2>
-            <p className="text-left text-sm font-medium">{movie.overview}</p>
-            <div className="flex flex-row space-x-5">
-              <h2>{formatMovieReleaseDate(movie.release_date)}</h2>
-              <h2>{formatMovieRuntimeToHHMM(movie.runtime)}</h2>
-            </div>
-            <div className="">
-              <DetailedMovieGenres genres={movie.genres} />
-            </div>
+          <article className="flex flex-col px-8 py-4 max-w-[60%] gap-4">
+            <header className="uppercase pb-8">
+              <h1 className="text-4xl font-extralight tracking-wide">{movie.title}</h1>
+              <h2 className="text-lg font-bold text-gray-500">{movie.tagline}</h2>
+            </header>
+            <article className="flex flex-row space-x-5">
+              <p>{Math.round(movie.vote_average * 10)}%</p>
+              <p>{formatMovieReleaseDate(movie.release_date)}</p>
+              <p>{formatMovieRuntimeToHHMM(movie.runtime)}</p>
+            </article>
+            <DetailedMovieGenres genres={movie.genres} />
+            <h3 className="text-lg font-bold uppercase">Overview</h3>
+            <p className="text-left font-medium pb-4 text-gray-300">{movie.overview}</p>
             <SocialComponent movieId={movie.id} homePage={movie.homepage} />
-          </div>
+          </article>
         </div>
       </section>
       {/* <DetailedMovieCast movieId={movie.id} /> */}
     </main>
   );
-}
-
-async function getIndividualMovieDetails(movieId: number) {
-  const path = new URL(`movie/${movieId}`, "https://api.themoviedb.org/3/");
-  path.searchParams.set("api_key", process.env.API_KEY!);
-
-  const response = await fetch(path.href);
-
-  return (await response.json()) as DetailedMovie;
 }

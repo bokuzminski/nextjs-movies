@@ -31,7 +31,7 @@ type Collection = {
   poster_path: string | null;
   backdrop_path: string | null;
 };
-type Genre = {
+export type Genre = {
   id: number;
   name: string;
 };
