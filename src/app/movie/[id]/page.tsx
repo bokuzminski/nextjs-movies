@@ -1,4 +1,5 @@
 import { DetailedMovieGenres } from "@/app/movie/[id]/components/DetailedMovieGenres";
+import { DetailedMovieCast } from "@/app/movie/[id]/components/cast/DetailedMovieCast";
 import SocialComponent from "@/components/websiteIcons/SocialComponent";
 import { fetchIndividualMovieDetails } from "@/lib/movdbRequest";
 import { formatMovieReleaseDate, formatMovieRuntimeToHHMM } from "@/lib/utils";
@@ -8,10 +9,10 @@ export default async function MovieDetailsPage(params: { params: { id: number } 
   const movie = await fetchIndividualMovieDetails(params.params.id);
 
   return (
-    <main className="py-10 sm:px-">
+    <main className="flex flex-col w-5/6 py-10 px-5">
       <section>
         <div
-          className="flex flex-row max-w-full mr-8 bg-blend-multiply bg-[#121212]/75 bg-no-repeat bg-right"
+          className="flex flex-row max-w-full bg-blend-multiply bg-[#121212]/75 bg-no-repeat bg-right"
           style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})` }}
         >
           <Image
@@ -27,6 +28,7 @@ export default async function MovieDetailsPage(params: { params: { id: number } 
             </header>
             <article className="flex flex-row space-x-5">
               <p>{Math.round(movie.vote_average * 10)}%</p>
+              <p className="uppercase">{movie.original_language}</p>
               <p>{formatMovieReleaseDate(movie.release_date)}</p>
               <p>{formatMovieRuntimeToHHMM(movie.runtime)}</p>
             </article>
@@ -37,7 +39,7 @@ export default async function MovieDetailsPage(params: { params: { id: number } 
           </article>
         </div>
       </section>
-      {/* <DetailedMovieCast movieId={movie.id} /> */}
+      <DetailedMovieCast movieId={movie.id} />
     </main>
   );
 }

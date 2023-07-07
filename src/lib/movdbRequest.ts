@@ -1,4 +1,4 @@
-import { DetailedMovie, Genre, MoviesResponse } from "@/lib/movdbTypes";
+import { Credits, DetailedMovie, Genre, MoviesResponse } from "@/lib/movdbTypes";
 
 const BASE_URL = "https://api.themoviedb.org/3/";
 const BEARER_TOKEN = process.env.BEARER_TOKEN;
@@ -67,6 +67,17 @@ export async function fetchMoviesBySearchQuery(query: string, page?: number): Pr
   const response = await fetch(requestPath, { headers: MovieDBRequestHeader });
   if (!response.ok) {
     throw new Error(`Failed to fetch ${query} movies`);
+  }
+
+  return await response.json();
+}
+
+export async function fetchCastForMovie(movieId: number): Promise<Credits> {
+  const requestPath = createNewRequest(`movie/${movieId}/credits`);
+
+  const response = await fetch(requestPath, { headers: MovieDBRequestHeader });
+  if (!response.ok) {
+    throw new Error(`Failed to fetch credits for movie: ${movieId}`);
   }
 
   return await response.json();

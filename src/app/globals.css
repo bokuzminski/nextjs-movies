@@ -5,3 +5,10 @@
 body {
   @apply bg-[#1e1b4b] text-[#e0e7ff];
 }
+@layer base {
+  img,
+  video {
+    max-width: initial;
+    height: initial;
+  }
+}

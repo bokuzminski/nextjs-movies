@@ -1,4 +1,3 @@
-import { SearchItemNavbar } from "@/components/SearchInput/SearchItem";
 import GenresSideBar from "@/components/Sidebar/GenresSideBar";
 import React from "react";
 import "./globals.css";
@@ -19,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="flex min-h-screen 2xl:max-w-screen 2xl:mx-auto">
         <GenresSideBar />
-        <SearchItemNavbar />
+        {/* <SearchItemNavbar /> */}
         {children}
       </body>
     </html>
